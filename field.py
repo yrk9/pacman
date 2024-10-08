@@ -40,3 +40,8 @@ class Field:
         Examples:
         """
         pass
+
+    def update_field(self) -> None:
+        pass
+
+    
