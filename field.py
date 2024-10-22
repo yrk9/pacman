@@ -28,8 +28,6 @@ class Field:
         Args:
             players (list[Player]): プレイヤーのリスト
             f_size (int): フィールドのサイズ
-        Example:
-            >>> f = Field(player_list, 5)
         """
         pass
 
@@ -40,7 +38,7 @@ class Field:
         Returns: なし
         Examples:
             >>> p = [Player(1, 0)]
-            >>> p[0].icon = "p1"
+            >>> p.icon = "p1"
             >>> field = Field(p, 3)
             >>> field.display_field()
             w: 上に移動
@@ -50,7 +48,7 @@ class Field:
         """
         pass
 
-    def update_field(self) -> None:
+    def update_field(self) -> list[list[str]]:
         """
         フィールドの情報を更新する
         Args: なし
@@ -62,3 +60,8 @@ class Field:
             >>> field.update_field()[0]
         """
         pass
+
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
