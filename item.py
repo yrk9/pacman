@@ -28,4 +28,41 @@ class Item():
         """
         pass
 
-    
+    def get_pos(self) -> tuple[int, int]:
+        """
+        次の時刻における座標を取得するメソッド
+
+        Returns:
+            tuple[int, int]: 現在の座標
+
+        Examples:
+            >>> item = Item(2, 3)
+            >>> item.get_pos()
+            (2, 3)
+        """
+
+        pass
+
+    def update_pos(self, stuck: bool = False) -> None:
+        """
+        座標を更新するメソッド
+        引数に次に移動したい座標をとり,その座標にプレイヤーの現在座標を更新する.
+
+        Args:
+            stuck (bool): そのターンに動けない場合にTrueを渡す (default: False)
+
+        Returns:
+            None
+
+        Examples:
+            >>> item = Item(2, 3)
+            >>> item.next_x = 3
+            >>> item.next_y = 4
+            >>> item.get_pos()
+            (2, 3)
+            >>> item.update_pos()
+            >>> item.get_pos()
+            (3, 4)
+
+        """
+        pass
