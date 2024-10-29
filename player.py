@@ -35,6 +35,7 @@ class Player(Item):
         引数にキー入力から受け取った次に移動したい方向をとり,
         現在のプレイヤーの座標から次に移動したい座標を戻り値として出力する.
 
+
         Args:
             dir (tuple[int, int]): キー入力から受け取った次に移動したい方向.
             (例:右に1マス移動したかったら(1,0)を受け取る)
@@ -52,7 +53,9 @@ class Player(Item):
             (2, 4)
 
         """
-        pass
+        self.next_x = self.now_x + dir[0]
+        self.next_y = self.now_y + dir[1]
+        return (self.next_x, self.next_y)
 
 
 if __name__ == "__main__":
