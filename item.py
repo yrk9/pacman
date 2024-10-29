@@ -3,7 +3,7 @@ player,enemy,の親クラス
 """
 
 
-class Item():
+class Item:
     """
     player,enemy,の親クラス
     Attributes:
@@ -24,7 +24,7 @@ class Item():
             icon:アイコン(str型)
 
         Examples:
-            >>>player=(2,3,😊)
+            >>> player=(2,3,"😊")
         """
         pass
 
@@ -36,7 +36,7 @@ class Item():
             tuple[int, int]: 現在の座標
 
         Examples:
-            >>> item = Item(2, 3)
+            >>> item = Item(2, 3,"😊")
             >>> item.get_pos()
             (2, 3)
         """
@@ -55,7 +55,7 @@ class Item():
             None
 
         Examples:
-            >>> item = Item(2, 3)
+            >>> item = Item(2, 3,"😊")
             >>> item.next_x = 3
             >>> item.next_y = 4
             >>> item.get_pos()
@@ -66,3 +66,8 @@ class Item():
 
         """
         pass
+
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()

@@ -1,6 +1,7 @@
-class Player():
+from item import Item
 
-    from item import Item
+
+class Player(Item):
     """プレイヤークラス
     Itemを継承して作成したプレイヤークラス.
     入力から移動方向を受け取って移動しようとする方向を計算するメソッドと
@@ -24,7 +25,7 @@ class Player():
             icon:アイコン(str型)
 
         Examples:
-            >>>player=(2,3,😊)
+            >>> player=(2,3,"😊")
         """
         pass
 
@@ -43,13 +44,17 @@ class Player():
             (2,3)だった時,戻り値は(3,3))
 
         Examples:
-            >>> player = Player(2, 3)
+            >>> player = Player(2, 3,"😊")
             >>> player.get_next_pos((1, 0))
             (3, 3)
-            >>> player = Player(2, 3)
+            >>> player = Player(2, 3,"😊")
             >>> player.get_next_pos((0, 1))
             (2, 4)
 
         """
         pass
-    
+
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
