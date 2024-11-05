@@ -1,11 +1,11 @@
 """アイテム
-player,enemy,の親クラス
+playerの親クラス
 """
 
 
 class Item:
     """
-    player,enemy,の親クラス
+    playerの親クラス
     Attributes:
        now_x(int) : 現在のx座標
        now_y(int) : 現在のy座標
