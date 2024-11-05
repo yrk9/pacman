@@ -2,7 +2,7 @@
 オブジェクトをフィールド上に描画する。
 
 """
-from item import Item
+# from item import Item
 from player import Player
 
 
