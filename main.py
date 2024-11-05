@@ -4,6 +4,7 @@ from config import common_args, Parameters
 from utils import dump_params, setup_params
 from utils import set_logging
 import logging
+from game import Game
 
 
 def main() -> None:
@@ -34,6 +35,9 @@ def main() -> None:
 
     # do something...
     logger.info('Process terminated successfully. ')
+
+    # ゲームの実行
+    Game(params)
 
 
 if __name__ == "__main__":

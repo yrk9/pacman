@@ -27,8 +27,9 @@ class Parameters:
     run_date: str = ''  # 実行時の時刻
     git_revision: str = ''  # 実行時のプログラムのGitのバージョン
 
+    field_size: int = 12
     param1: int = 0  # パラメータを定義する例
-    param2: dict = field(default_factory=lambda: {'k1': 'v1', 'k2': 'v2'})
+    # param2: dict = field(default_factory=lambda: {'k1': 'v1', 'k2': 'v2'})
     # リストや辞書で与える例
 
 
