@@ -1,8 +1,5 @@
 # Pacman Project
 
-プロジェクトの概要をここに記載します．
-このREADMEは雛形ですので，適宜修正してください．
-
 ## Requirement
 - Python 3.9
 
