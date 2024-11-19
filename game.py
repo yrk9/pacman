@@ -5,7 +5,10 @@ from food import Food
 from field import Field
 from config import Parameters
 from user_input import UserInput
+import logging
 import os
+
+logger = logging.getLogger(__name__)
 
 
 class Game:
@@ -38,9 +41,13 @@ class Game:
         f_size = params.field_size
         # フィールドの初期化
         self.players = [Player(1, 1, "😊")]
-        self.enemys = [Enemy(2, 3, "👹")]
+        self.enemys = [Enemy(1, 3, "👹")]
         self.foods = [Food(4, 4)]
-        self.field = Field(self.players, self.enemys, self.foods, f_size)
+        self.field = Field(
+                        self.players, 
+                        self.enemys, 
+                        self.foods, 
+                        f_size)
 
     def start(self) -> None:
         """ゲームのメインループ
@@ -63,14 +70,32 @@ class Game:
             for enemy in self.enemys:
                 enemy.get_next_pos()
 
-            # プレイヤーの移動
-            for item in self.players:
-                item.update_pos(stuck=True)
-          
-            # プレイヤーの移動
-            for item in self.enemys:
-                item.update_pos(stuck=True)
+            # プレイヤーと敵の移動
+            for item in self.players + self.enemys:
+                item.update_pos()
 
+            for player in self.players:
+                # 敵との衝突判定
+                if self.field.check_bump(player, list(self.enemys)):
+                    self.field.update_field()
+                    os.system("cls" if os.name == "nt" else "clear")
+                    # ターミナルをクリア
+                    self.field.print_field()
+                    logger.info("Game Over!")
+                    return "Game Over!"
+
+                # 食べ物との衝突判定
+                bumped_item = self.field.check_bump(player, list(self.foods))
+                if bumped_item is not None:
+                    bumped_item.status = False
+                    if all([not food.status for food in self.foods]):
+                        self.field.update_field()
+                        os.system("cls" if os.name == "nt" else "clear")
+                        # ターミナルをクリア
+                        self.field.print_field()
+                        logger.info("Game Clear!")
+                        return "Game Clear!"
+                    
             self.field.update_field()
 
             time.sleep(0.3)
