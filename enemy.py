@@ -31,7 +31,7 @@ class Enemy(Item):
         super().__init__(x, y, "👹")
         self.icon = "👹"
 
-    def get_next_pos(self, dir: tuple[int, int]) -> tuple[int, int]:
+    def get_next_pos(self) -> tuple[int, int]:
         """
         ランダムで移動方向を決定し，移動しようとする方向を計算して次の座標を返すメソッド
         現在のエネミーの座標から次に移動したい座標を戻り値として出力する.
