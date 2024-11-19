@@ -67,6 +67,9 @@ class Game:
             for item in self.players:
                 item.update_pos(stuck=True)
           
+            # プレイヤーの移動
+            for item in self.enemys:
+                item.update_pos(stuck=True)
 
             self.field.update_field()
 
