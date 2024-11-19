@@ -1,5 +1,7 @@
 import time
 from player import Player
+from enemy import Enemy
+from food import Food
 from field import Field
 from config import Parameters
 from user_input import UserInput
@@ -21,6 +23,8 @@ class Game:
             params (Parameters): configのパラメータのインスタンス
         """
         self.players = []
+        self.enemys = []
+        self.foods = []
         self.field = None
         self.setup(params)
         self.start()
@@ -34,7 +38,9 @@ class Game:
         f_size = params.field_size
         # フィールドの初期化
         self.players = [Player(1, 1, "😊")]
-        self.field = Field(self.players, f_size)
+        self.enemys = [Enemy(2, 3, "👹")]
+        self.foods = [Food(4, 4)]
+        self.field = Field(self.players, self.enemys, self.foods, f_size)
 
     def start(self) -> None:
         """ゲームのメインループ
@@ -53,9 +59,14 @@ class Game:
                 key = UserInput.get_user_input()
                 player.get_next_pos(key)
 
+            # 敵の移動を決定
+            for enemy in self.enemys:
+                enemy.get_next_pos()
+
             # プレイヤーの移動
             for item in self.players:
                 item.update_pos(stuck=True)
+          
 
             self.field.update_field()
 

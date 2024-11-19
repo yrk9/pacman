@@ -2,8 +2,10 @@
 オブジェクトをフィールド上に描画する。
 
 """
-# from item import Item
+from item import Item
 from player import Player
+from enemy import Enemy
+from food import Food
 
 
 class Field:
@@ -14,6 +16,8 @@ class Field:
 
     Attributes:
         players (list[Player]): プレイヤーのリスト
+        enemys (list[Enemy]): 敵のリスト
+        foods (list[Food]): 食べ物のリスト
         field (list[list[str]]): フィールドの情報
         f_size (int): フィールドのサイズ
     """
@@ -21,6 +25,8 @@ class Field:
     def __init__(
             self,
             players: list[Player],
+            enemys: list[Enemy],
+            foods: list[Food],
             f_size: int = 6) -> None:
         """
         Fieldクラスの初期化を行う関数
@@ -30,9 +36,12 @@ class Field:
             f_size (int): フィールドのサイズ
         Example:
             p = [Player(1, 0, '😊')]
-            f = Field(p, 3)
+            food = [Food(3, 3)]
+            f = Field(p, food, 3)
         """
         self.players = players
+        self.enemys = enemys
+        self.foods = foods
         self.f_size = f_size
         self.field = [["　" for _ in range(f_size)] for _ in range(f_size)]
         self.update_field()
@@ -44,8 +53,9 @@ class Field:
         Returns: なし
         Examples:
             >>> p=[Player(1, 0, '😊')]
+            >>> food = [Food(3, 3)]
             >>> p[0].icon = "p1"
-            >>> field = Field(p, 3)
+            >>> field = Field(p, food, 3)
             >>> field.print_field()
         w: 上に移動
         a: 左に移動
@@ -82,10 +92,49 @@ class Field:
             for j in range(len(self.field[i])):
                 self.field[i][j] = "　"
         #  Fieldを更新する処理を記述
+        for enemy in self.enemys:
+            if enemy.status:
+                self.field[enemy.now_y][enemy.now_x] = enemy.icon
+        for food in self.foods:
+            if food.status:
+                self.field[food.now_y][food.now_x] = food.icon
         for player in self.players:
             if player.status:
                 self.field[player.now_y][player.now_x] = player.icon
         return self.field
+
+    def check_bump(
+            self,
+            target: Item,
+            items: list[Item]) -> Item | None:
+        """
+        2つのアイテムの位置が重なっているか判定する関数
+
+        Args:
+            target (Item): アイテム1
+            items (list[Item]): アイテムのリスト2
+
+        Returns:
+            Item | None: 重なっているアイテムがあればそのアイテム、なければNone
+
+        Examples:
+            >>> p = Item(0, 0)
+            >>> e = Item(1, 1)
+            >>> field = Field([p], [e], [], [])
+            >>> p.next_x = 1
+            >>> r = field.check_bump(p, [e])
+            >>> r is None
+            True
+            >>> p.next_y = 1
+            >>> r = field.check_bump(p, [e])
+            >>> r is e
+            True
+        """
+        # 衝突判定を行う処理を記述
+        for item in items:
+            if item.next_x == target.next_x and item.next_y == target.next_y:
+                return item
+        return None
 
 
 if __name__ == "__main__":
