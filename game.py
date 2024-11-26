@@ -12,11 +12,13 @@ logger = logging.getLogger(__name__)
 
 
 class Game:
-    """Gameクラス
+    """Gameクラス (ゲームを実行する)
 
     Attributes:
         players (list[Player]): プレイヤー
-        field (Field): フィールド
+        enemies (list[Enemy]): 敵のリスト
+        foods (list[Food]): 食べ物のリスト
+        field (Field): フィールドのインスタンス
     """
 
     def __init__(self, params: Parameters) -> None:
@@ -25,10 +27,10 @@ class Game:
         Args:
             params (Parameters): configのパラメータのインスタンス
         """
-        self.players = []
-        self.enemys = []
-        self.foods = []
-        self.field = None
+        self.players: list[Player] = []
+        self.enemys: list[Enemy] = []
+        self.foods: list[Food] = []
+        self.field = Field([], [], [], 0)
         self.setup(params)
         self.start()
 
@@ -43,13 +45,9 @@ class Game:
         self.players = [Player(1, 1, "😊")]
         self.enemys = [Enemy(1, 3, "👹")]
         self.foods = [Food(4, 4)]
-        self.field = Field(
-                        self.players, 
-                        self.enemys, 
-                        self.foods, 
-                        f_size)
+        self.field = Field(self.players, self.enemys, self.foods, f_size)
 
-    def start(self) -> None:
+    def start(self) -> str:
         """ゲームのメインループ
 
         Returns:
