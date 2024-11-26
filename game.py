@@ -5,6 +5,8 @@ from food import Food
 from field import Field
 from config import Parameters
 from user_input import UserInput
+from random import randint
+import random
 import logging
 import os
 
@@ -40,10 +42,13 @@ class Game:
         Args:
             param (Parameters): configのパラメータのインスタンス
         """
+        enemy_icons = ["👹", "🐲", "👺"]
         f_size = params.field_size
         # フィールドの初期化
         self.players = [Player(1, 1, "😊")]
-        self.enemys = [Enemy(1, 3, "👹")]
+        self.enemys = [Enemy(randint(1, f_size - 2),
+                             randint(1, f_size - 2),
+                             random.choice(enemy_icons))]
         self.foods = [Food(4, 4)]
         self.field = Field(self.players, self.enemys, self.foods, f_size)
 
