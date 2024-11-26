@@ -93,7 +93,7 @@ class Game:
                         self.field.print_field()
                         logger.info("Game Clear!")
                         return "Game Clear!"
-                    
+
             self.field.update_field()
 
             time.sleep(0.3)
