@@ -1,12 +1,11 @@
 from item import Item
-from config import Parameters
 import random
 
 
 class Enemy(Item):
     """プレイヤークラス
     Itemを継承して作成したエネミークラス.
-    アイコンに応じてランダムに移動する
+    ランダムで移動する
 
     Attributes:
         self.icon(str) : 表示されるアイテムのアイコン
@@ -29,23 +28,13 @@ class Enemy(Item):
         Examples:
             >>> enemy=(2,3,"👹")
         """
-        if self.icon == "👹":
-            super().__init__(x, y, "👹")
-            self.icon = "👹"
+        super().__init__(x, y, "👹")
+        self.icon = "👹"
 
-        if self.icon == "👺":
-            super().__init__(x, y, "👺")
-            self.icon = "👺"
-
-        if self.icon == "👻":
-            super().__init__(x, y, "👻")
-            self.icon = "👻"
-
-    def get_next_pos(self, params: Parameters) -> tuple[int, int]:
+    def get_next_pos(self) -> tuple[int, int]:
         """
         ランダムで移動方向を決定し，移動しようとする方向を計算して次の座標を返すメソッド
         現在のエネミーの座標から次に移動したい座標を戻り値として出力する.
-        iconによって移動するパターンが変化する.
 
 
         Args:
@@ -65,20 +54,8 @@ class Enemy(Item):
             (2, 4)
 
         """
-        if self.icon == "👻":
-            self.next_x = random.randint(1, params.field_size - 2)
-            self.next_y = random.randint(1, params.field_size - 2)
-            return (self.next_x, self.next_y)
-
-        if self.icon == "👹":
-            # 上下左右に移動
-            direction = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-
-        if self.icon == "👺":
-            # 上下左右2マスor斜めに移動
-            direction = [(1, 1), (1, -1), (1, -1), (-1, -1),
-                         (2, 0), (-2, 0), (0, 2), (0, -2)]
-
+        # 上下左右に移動
+        direction = [(0, 1), (0, -1), (1, 0), (-1, 0)]
         # directionの中からランダムで選択
         dir = random.choice(direction)
         self.next_x = self.now_x + dir[0]
