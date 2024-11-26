@@ -28,8 +28,8 @@ class Enemy(Item):
         Examples:
             >>> enemy=(2,3,"👹")
         """
-        super().__init__(x, y, "👹")
-        self.icon = "👹"
+        super().__init__(x, y, icon)
+        self.icon = icon
 
     def get_next_pos(self) -> tuple[int, int]:
         """
@@ -54,8 +54,24 @@ class Enemy(Item):
             (2, 4)
 
         """
+        """
         # 上下左右に移動
         direction = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        """
+
+        if self.icon == "👹":
+            # 上下左右に移動
+            direction = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+
+        if self.icon == "👺":
+            # 斜めに移動
+            direction = [(1, 1), (1, -1), (1, -1), (-1, -1)]
+
+        if self.icon == "🐲":
+            # 上下左右・斜めに移動
+            direction = [(0, 1), (0, -1), (1, 0), (-1, 0),
+                         (1, 1), (1, -1), (1, -1), (-1, -1)]
+
         # directionの中からランダムで選択
         dir = random.choice(direction)
         self.next_x = self.now_x + dir[0]
