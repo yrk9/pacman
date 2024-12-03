@@ -70,6 +70,10 @@ class Item:
             (3, 4)
 
         """
+        if stuck:  # そのターンに動けない場合更新しない
+            self.next_x = self.now_x
+            self.next_y = self.now_y
+            return
         self.now_x = self.next_x
         self.now_y = self.next_y
 
