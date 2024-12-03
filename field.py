@@ -6,6 +6,7 @@ from item import Item
 from player import Player
 from enemy import Enemy
 from food import Food
+from block import Block
 
 
 class Field:
@@ -27,6 +28,7 @@ class Field:
             players: list[Player],
             enemys: list[Enemy],
             foods: list[Food],
+            blocks: list[Block],
             f_size: int = 6):
         """
         Fieldクラスの初期化を行う関数
@@ -42,6 +44,7 @@ class Field:
         self.players = players
         self.enemys = enemys
         self.foods = foods
+        self.blocks = blocks
         self.f_size = f_size
         self.field = [["　" for _ in range(f_size)] for _ in range(f_size)]
         self.update_field()
@@ -101,6 +104,9 @@ class Field:
         for player in self.players:
             if player.status:
                 self.field[player.now_y][player.now_x] = player.icon
+        for block in self.blocks:
+            if block.status:
+                self.field[block.now_y][block.now_x] = block.icon
         return self.field
 
     def check_bump(
@@ -133,6 +139,8 @@ class Field:
         # 衝突判定を行う処理を記述
         for item in items:
             if item.next_x == target.next_x and item.next_y == target.next_y:
+                return item
+            if item.now_x == target.now_x and item.now_y == target.now_y:
                 return item
         return None
 

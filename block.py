@@ -29,7 +29,7 @@ class Block(Item):
             >>> block=(2,3,"⛓️")
         """
         super().__init__(x, y, "⛓️")
-        self.icon = "⛓️"
+        self.icon = icon
 
 
 if __name__ == "__main__":

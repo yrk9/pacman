@@ -2,6 +2,7 @@ import time
 from player import Player
 from enemy import Enemy
 from food import Food
+from block import Block
 from field import Field
 from config import Parameters
 from user_input import UserInput
@@ -32,7 +33,8 @@ class Game:
         self.players: list[Player] = []
         self.enemys: list[Enemy] = []
         self.foods: list[Food] = []
-        self.field = Field([], [], [], 0)
+        self.block: list[Block] = []
+        self.field = Field([], [], [], [], 0)
         self.setup(params)
         self.start()
 
@@ -50,7 +52,14 @@ class Game:
                              randint(1, f_size - 2),
                              random.choice(enemy_icons))]
         self.foods = [Food(4, 4)]
-        self.field = Field(self.players, self.enemys, self.foods, f_size)
+        self.blocks = [
+            Block(x, y, "⛓️⛓️")
+            for x in range(f_size)
+            for y in range(f_size)
+            if x == 0 or x == f_size - 1 or y == 0 or y == f_size - 1
+        ]
+        self.field = Field(self.players, self.enemys, self.foods,
+                           self.blocks, f_size)
 
     def start(self) -> str:
         """ゲームのメインループ
@@ -72,10 +81,13 @@ class Game:
             # 敵の移動を決定
             for enemy in self.enemys:
                 enemy.get_next_pos()
-
             # プレイヤーと敵の移動
             for item in self.players + self.enemys:
-                item.update_pos()
+                bumped_item = self.field.check_bump(item, list(self.blocks))
+                if bumped_item is not None:
+                    item.update_pos(stuck=True)
+                else:
+                    item.update_pos()
 
             for player in self.players:
                 # 敵との衝突判定
