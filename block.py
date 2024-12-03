@@ -28,8 +28,8 @@ class Block(Item):
         Examples:
             >>> block=(2,3,"⛓️")
         """
-        super().__init__(x, y, "⛓️")
-        self.icon = "⛓️"
+        super().__init__(x, y, icon)
+        self.icon = icon
 
 
 if __name__ == "__main__":
