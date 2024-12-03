@@ -27,8 +27,8 @@ class Player(Item):
         Examples:
             >>> player=(2,3,"😊")
         """
-        super().__init__(x, y, "😶")
-        self.icon = "😶"
+        super().__init__(x, y, icon)
+        self.icon = icon
 
     def get_next_pos(self, dir: tuple[int, int]) -> tuple[int, int]:
         """

@@ -28,7 +28,11 @@ class Block(Item):
         Examples:
             >>> block=(2,3,"⛓️")
         """
+<<<<<<< HEAD
         super().__init__(x, y, "⛓️")
+=======
+        super().__init__(x, y, icon)
+>>>>>>> ce20554fc28baa52154ecc400ce94f233051f9fc
         self.icon = icon
 
 

@@ -17,10 +17,18 @@ class UserInput:
             return (0, -1)
         elif key == "a":
             return (-1, 0)
-        elif key == "s":
+        elif key == "x":
             return (0, 1)
         elif key == "d":
             return (1, 0)
+        elif key == "q":
+            return (-1, -1)
+        elif key == "e":
+            return (1, -1)
+        elif key == "c":
+            return (1, 1)
+        elif key == "z":
+            return (-1, 1)
         else:
             return (0, 0)
 
