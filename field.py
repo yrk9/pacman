@@ -19,6 +19,7 @@ class Field:
         players (list[Player]): プレイヤーのリスト
         enemys (list[Enemy]): 敵のリスト
         foods (list[Food]): 食べ物のリスト
+        blocks (list[Block]): 障害物のリスト
         field (list[list[str]]): フィールドの情報
         f_size (int): フィールドのサイズ
     """
@@ -29,7 +30,7 @@ class Field:
             enemys: list[Enemy],
             foods: list[Food],
             blocks: list[Block],
-            f_size: int = 6):
+            f_size: int = 6) -> None:
         """
         Fieldクラスの初期化を行う関数
 
@@ -55,20 +56,23 @@ class Field:
         Args: なし
         Returns: なし
         Examples:
-            >>> p=[Player(1, 0, '😊')]
+            >>> p = [Player(1, 0, "p1")]
             >>> food = [Food(3, 3)]
+            >>> enemy = [Enemy(4, 4, "e1")]
+            >>> block = [Block(5, 5)]
             >>> p[0].icon = "p1"
-            >>> field = Field(p, food, 3)
+            >>> field = Field(p, food, enemy, block, 3)
             >>> field.print_field()
-        w: 上に移動
-        a: 左に移動
-        s: 下に移動
-        d: 右に移動
+            キー配置
+            ↖  ↑  ↗　Q W E
+            ← 😊  →  A   D
+            ↙  ↓  ↘　Z X C
         """
-        print("w: 上に移動")
-        print("a: 左に移動")
-        print("s: 下に移動")
-        print("d: 右に移動")
+        print("キー配置")
+        print("↖  ↑  ↗　Q W E")
+        print("← " + self.players[0].icon + "  →  A   D")
+        print("↙  ↓  ↘　Z X C")
+        print("")
 
         # self.fieldを表示する処理を記述
         max_width = max(len(row) for row in self.field)  # フィールド内の最大幅を取得
