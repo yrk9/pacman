@@ -54,6 +54,15 @@ python main.py -h
 .
 ├── config.py           # パラメータ定義
 ├── main.py             # 実行ファイル
+├── item.py             # 各アイテムの初期設定，座標更新
+├── block.py            # 障害物定義
+├── player.py           # 操作プレイヤー定義
+├── enemy.py            # 敵の動きを定義
+├── field.py            # フィールドの表示，衝突判定
+├── food.py             # ゴールアイテムを定義
+├── game.py             # 初期設定，メインループ
+├── user_input.py       # ユーザーの入力を受け取る
+├── input_without_enter.py # エンターキーを押さずに入力を受け取る
 ├── parameters.json     # パラメータ指定用ファイル
 ├── result              # 結果出力ディレクトリ
 │   └── 20211026_165841
